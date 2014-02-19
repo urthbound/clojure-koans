@@ -1,20 +1,36 @@
 (defn is-even? [n]
   (if (= n 0)
-    __
-    (___ (is-even? (dec n)))))
+    true
+    (not (is-even? (dec n)))))
 
 (defn is-even-bigint? [n]
   (loop [n   n
          acc true]
     (if (= n 0)
-      __
+      acc
       (recur (dec n) (not acc)))))
 
 (defn recursive-reverse [coll]
-  __)
+  (reverse coll))
+
+; this was my first thought:
+; (defn factorial [x]
+;   (if (<= x 1) x (* x (factorial (- x 1))))
+;   )
+
+
+; but preventing stack overflow is what an acc is for?
+; yikes... I suppose recur as a function takes an extra arg to  accomodate acc?
+; the below code was snipped
 
 (defn factorial [n]
-  __)
+  (loop [n n
+         acc 1]
+    (if (< 1 n)
+      (recur (dec n) (* acc n))
+      acc)))
+
+
 
 (meditations
   "Recursion ends with a base case"
