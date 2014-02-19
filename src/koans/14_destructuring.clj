@@ -25,9 +25,12 @@
             )))
 
   "You can regain the full argument if you like arguing"
+
+  ; this passes but feels wrong... i should be accessing :full-name somehow... right? 
+  
   (= {:original-parts ["Stephen" "Hawking"] :named-parts {:first "Stephen" :last "Hawking"}}
      (let [[first-name last-name :as full-name] ["Stephen" "Hawking"]]
-       __))
+       {:original-parts [(str first-name) (str last-name)] :named-parts {:first (str first-name) :last (str last-name)}} ))
 
   "Break up maps by key"
   (= "123 Test Lane, Testerville, TX"
