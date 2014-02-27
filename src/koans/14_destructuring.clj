@@ -25,23 +25,24 @@
             )))
 
   "You can regain the full argument if you like arguing"
-
-  ; this passes but feels wrong... i should be accessing :full-name somehow... right? 
-  
   (= {:original-parts ["Stephen" "Hawking"] :named-parts {:first "Stephen" :last "Hawking"}}
      (let [[first-name last-name :as full-name] ["Stephen" "Hawking"]]
-       {:original-parts [(str first-name) (str last-name)] :named-parts {:first (str first-name) :last (str last-name)}} ))
+       {:original-parts [first-name last-name] :named-parts {:first (first full-name) :last (last full-name)}}) 
+        )
 
   "Break up maps by key"
   (= "123 Test Lane, Testerville, TX"
      (let [{street-address :street-address, city :city, state :state} test-address]
-       __))
+       (str street-address ", " city ", " state)  ))
 
   "Or more succinctly"
   (= "123 Test Lane, Testerville, TX"
-     (let [{:keys [street-address __ __]} test-address]
-       __))
+     (let [{:keys [street-address city state]} test-address]
+       (str street-address ", " city ", " state)  ))
 
   "All together now!"
   (= "Test Testerson, 123 Test Lane, Testerville, TX"
-     (___ ["Test" "Testerson"] test-address)))
+     (let [ x ["Test" "Testerson"]] 
+       (str (first x) " " (last x) ", " (:street-address test-address) ", "
+            (:city test-address) ", " (:state test-address) )
+       )))
